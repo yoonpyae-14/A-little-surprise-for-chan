@@ -1,0 +1,1469 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#dcebd8">
+
+<title>The Little Universe ✨</title>
+
+<style>
+
+:root {
+
+  --mint: #dcebd8;
+
+  --green: #648363;
+
+  --dark: #344d3a;
+
+  --cream: #fffdf5;
+
+  --pink: #f6d9d9;
+
+  --gold: #d6b979;
+
+}
+
+* { box-sizing: border-box; }
+
+body {
+
+  margin: 0;
+
+  color: var(--dark);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  background:
+
+    radial-gradient(circle at 10% 10%, #ffffff 0, transparent 35%),
+
+    linear-gradient(145deg, #e8f1df, #fdf9ee 55%, #d8e8d5);
+
+  min-height: 100vh;
+
+}
+
+button, input { font: inherit; }
+
+button {
+
+  border: 0;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+
+}
+
+button:focus-visible, input:focus-visible {
+
+  outline: 3px solid var(--gold);
+
+  outline-offset: 3px;
+
+}
+
+button:disabled { opacity: .45; cursor: not-allowed; }
+
+#stars {
+
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  z-index: 0;
+
+}
+
+.star {
+
+  position: absolute;
+
+  color: white;
+
+  animation: twinkle 3s infinite ease-in-out alternate;
+
+}
+
+@keyframes twinkle {
+
+  from { opacity: .2; transform: scale(.8); }
+
+  to { opacity: .9; transform: scale(1.2); }
+
+}
+
+main {
+
+  position: relative;
+
+  z-index: 1;
+
+  width: min(100% - 28px, 700px);
+
+  margin: auto;
+
+  padding: 28px 0 45px;
+
+}
+
+.screen { display: none; animation: appear .6s ease; }
+
+.screen.active { display: block; }
+
+@keyframes appear {
+
+  from { opacity: 0; transform: translateY(12px); }
+
+  to { opacity: 1; transform: translateY(0); }
+
+}
+
+.panel {
+
+  background: rgba(255,253,245,.91);
+
+  border: 1px solid rgba(100,131,99,.22);
+
+  border-radius: 25px;
+
+  padding: clamp(22px, 5vw, 40px);
+
+  text-align: center;
+
+  box-shadow: 0 15px 45px rgba(57,83,55,.09);
+
+  backdrop-filter: blur(8px);
+
+}
+
+.eyebrow {
+
+  text-transform: uppercase;
+
+  letter-spacing: 4px;
+
+  font: 11px Arial, sans-serif;
+
+  color: var(--green);
+
+}
+
+h1 { font-size: clamp(39px, 9vw, 66px); font-weight: normal; margin: 15px 0; }
+
+h2 { font-size: clamp(27px, 6vw, 38px); font-weight: normal; margin: 10px 0 18px; }
+
+h3 { font-weight: normal; }
+
+p { line-height: 1.85; }
+
+.moon { font-size: 55px; margin: 15px 0; }
+
+.subtitle { color: #6e8069; font-style: italic; }
+
+input {
+
+  width: 100%;
+
+  border: 1px solid #a6bea0;
+
+  background: white;
+
+  border-radius: 30px;
+
+  padding: 15px 18px;
+
+  margin: 12px 0;
+
+  color: var(--dark);
+
+  font-size: 16px;
+
+}
+
+.btn {
+
+  background: var(--green);
+
+  color: white;
+
+  padding: 13px 23px;
+
+  border-radius: 30px;
+
+  margin: 6px;
+
+  min-height: 45px;
+
+  transition: transform .2s, background .2s;
+
+}
+
+.btn:hover { background: #496a4a; transform: translateY(-2px); }
+
+.btn.light {
+
+  color: var(--dark);
+
+  background: #edf3e6;
+
+  border: 1px solid #c5d8bc;
+
+}
+
+.btn.gold { background: #b69b5e; }
+
+.message { min-height: 25px; font: 14px Arial,sans-serif; color: #a05b58; }
+
+.hidden { display: none !important; }
+
+.divider {
+
+  width: 55px;
+
+  height: 1px;
+
+  background: var(--gold);
+
+  margin: 22px auto;
+
+}
+
+.progress {
+
+  height: 5px;
+
+  background: #e4eadd;
+
+  border-radius: 9px;
+
+  overflow: hidden;
+
+  margin: 20px 0;
+
+}
+
+#bar {
+
+  height: 100%;
+
+  width: 0;
+
+  background: var(--green);
+
+  transition: width .4s;
+
+}
+
+.quest-list {
+
+  display: grid;
+
+  grid-template-columns: repeat(2,1fr);
+
+  gap: 10px;
+
+  margin-top: 22px;
+
+}
+
+.quest {
+
+  padding: 17px 8px;
+
+  border: 1px solid #d9e3d1;
+
+  border-radius: 17px;
+
+  background: white;
+
+  font: 13px Arial,sans-serif;
+
+}
+
+.quest span { display: block; font-size: 25px; margin-bottom: 8px; }
+
+.quest.done { background: #e1eedb; border-color: #86a881; }
+
+.quest.locked { opacity: .55; }
+
+.answers {
+
+  display: grid;
+
+  gap: 10px;
+
+  margin: 22px 0;
+
+}
+
+.answer {
+
+  text-align: left;
+
+  border: 1px solid #d6e2ce;
+
+  background: white;
+
+  color: var(--dark);
+
+  padding: 13px 16px;
+
+  border-radius: 13px;
+
+}
+
+.answer:hover { background: #eaf3e5; }
+
+.answer.correct { background: #d7ead0; }
+
+.answer.wrong { background: #f8e1df; }
+
+.memory-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(4,1fr);
+
+  gap: 8px;
+
+  margin: 22px 0;
+
+}
+
+.memory-card {
+
+  aspect-ratio: 1;
+
+  border-radius: 12px;
+
+  background: #dcebd8;
+
+  color: var(--green);
+
+  font-size: clamp(20px, 7vw, 34px);
+
+  border: 1px solid #bfd2b8;
+
+}
+
+.memory-card.open, .memory-card.matched { background: #fff; }
+
+.memory-card.matched { border-color: var(--gold); }
+
+.puzzle {
+
+  display: grid;
+
+  grid-template-columns: repeat(3,1fr);
+
+  gap: 5px;
+
+  max-width: 320px;
+
+  margin: 22px auto;
+
+}
+
+.tile {
+
+  aspect-ratio: 1;
+
+  border-radius: 12px;
+
+  background: #cbdcc2;
+
+  color: var(--dark);
+
+  font-size: 24px;
+
+  border: 1px solid #a9c09f;
+
+}
+
+.tile.empty { background: rgba(255,255,255,.65); border: 1px dashed #b8cbb0; }
+
+#catchArea {
+
+  height: 300px;
+
+  border: 1px solid #c6d8bd;
+
+  border-radius: 20px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  margin: 20px 0;
+
+  background: linear-gradient(#d9e8ee,#f9f7e8);
+
+  touch-action: manipulation;
+
+}
+
+.heart {
+
+  position: absolute;
+
+  background: transparent;
+
+  font-size: 30px;
+
+  padding: 8px;
+
+  animation: floatUp 2.8s linear forwards;
+
+}
+
+@keyframes floatUp {
+
+  from { transform: translateY(0); }
+
+  to { transform: translateY(-70px); }
+
+}
+
+.letter {
+
+  text-align: left;
+
+  padding: 24px 20px;
+
+  border: 1px solid #e2d8bd;
+
+  background: #fffdf5;
+
+  border-radius: 8px;
+
+  box-shadow: 0 5px 18px #b9b49b20;
+
+  line-height: 2;
+
+}
+
+.gift {
+
+  font-size: 100px;
+
+  animation: bob 2s ease-in-out infinite alternate;
+
+}
+
+@keyframes bob { to { transform: translateY(-10px) rotate(3deg); } }
+
+footer {
+
+  position: relative;
+
+  text-align: center;
+
+  color: #71866c;
+
+  font: 11px Arial,sans-serif;
+
+  letter-spacing: 1px;
+
+  padding: 24px 0 0;
+
+}
+
+@media(max-width:380px) {
+
+  .panel { padding: 20px 15px; }
+
+  .quest-list { gap: 7px; }
+
+  .memory-grid { gap: 5px; }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<main>
+
+  <!-- 1. WELCOME -->
+
+  <section class="screen active" id="welcome">
+
+    <div class="panel">
+
+      <div class="eyebrow">A little world made for you</div>
+
+      <div class="moon">☾ ✧</div>
+
+      <h1>The Little<br>Universe</h1>
+
+      <p class="subtitle">A tiny universe that belongs to one very special person.</p>
+
+      <div class="divider"></div>
+
+      <p>Somewhere between the stars and the little things in life, a surprise is waiting for you.</p>
+
+      <p>But first, this universe needs to know who's visiting. ♡</p>
+
+      <input id="nameInput" type="text" autocomplete="name"
+
+        placeholder="Enter your full name..." aria-label="Full name">
+
+      <button class="btn" id="enterBtn">Open the secret door ✨</button>
+
+      <div class="message" id="nameError" role="status"></div>
+
+    </div>
+
+  </section>
+
+  <!-- 2. BIRTHDAY PERSON CHECK -->
+
+  <section class="screen" id="identity">
+
+    <div class="panel">
+
+      <div class="moon">🌙</div>
+
+      <div class="eyebrow">One tiny question</div>
+
+      <h2>Are you the birthday girl?</h2>
+
+      <p>This little universe was made especially for someone whose birthday is October 14. 💚</p>
+
+      <button class="btn" id="yesBtn">Of course I am! ♡</button>
+
+      <button class="btn light" id="noBtn">Just looking around</button>
+
+      <p class="message" id="identityMsg" role="status"></p>
+
+    </div>
+
+  </section>
+
+  <!-- 3. UNIVERSE MAP -->
+
+  <section class="screen" id="journey">
+
+    <div class="panel">
+
+      <div class="eyebrow">October 14 · Your special day</div>
+
+      <h2>Welcome, Chan ♡</h2>
+
+      <p>Happy 19th birthday, Aye Chan Myat Mon Oo.</p>
+
+      <p>Four little adventures are waiting for you. Complete each one to discover what's hidden inside this universe.</p>
+
+      <div class="progress"><div id="bar"></div></div>
+
+      <p id="progressText" class="subtitle">0 of 4 adventures complete</p>
+
+      <div class="quest-list">
+
+        <div class="quest" id="q0"><span>✦</span>01 · The Quiz</div>
+
+        <div class="quest locked" id="q1"><span>♡</span>02 · Memory</div>
+
+        <div class="quest locked" id="q2"><span>🧩</span>03 · The Puzzle</div>
+
+        <div class="quest locked" id="q3"><span>💗</span>04 · Catch Hearts</div>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <p id="nextText">Your first adventure is ready.</p>
+
+      <button class="btn" id="startGame">Begin the adventure →</button>
+
+    </div>
+
+  </section>
+
+  <!-- 4. QUIZ -->
+
+  <section class="screen" id="quiz">
+
+    <div class="panel">
+
+      <div class="eyebrow">Adventure 01</div>
+
+      <h2>A Little Quiz ✧</h2>
+
+      <p>Five tiny questions. Let's see how well you know this little world!</p>
+
+      <p id="quizCount" class="subtitle"></p>
+
+      <h3 id="question"></h3>
+
+      <div class="answers" id="answers"></div>
+
+      <p id="quizMsg" class="message" role="status"></p>
+
+      <button class="btn hidden" id="quizNext">Next question →</button>
+
+    </div>
+
+  </section>
+
+  <!-- 5. MEMORY -->
+
+  <section class="screen" id="memory">
+
+    <div class="panel">
+
+      <div class="eyebrow">Adventure 02</div>
+
+      <h2>Find the Pairs ♡</h2>
+
+      <p>Turn over the cards and find all six matching pairs.</p>
+
+      <p id="memoryCount" class="subtitle">Pairs found: 0 / 6</p>
+
+      <div class="memory-grid" id="memoryGrid"></div>
+
+      <p id="memoryMsg" class="message" role="status"></p>
+
+    </div>
+
+  </section>
+
+  <!-- 6. PUZZLE -->
+
+  <section class="screen" id="puzzle">
+
+    <div class="panel">
+
+      <div class="eyebrow">Adventure 03</div>
+
+      <h2>Put the Stars in Order ✨</h2>
+
+      <p>Tap a numbered tile next to the empty space to move it. Arrange the numbers from 1 to 8.</p>
+
+      <div class="puzzle" id="puzzleGrid"></div>
+
+      <button class="btn light" id="shufflePuzzle">Shuffle again ↻</button>
+
+      <p id="puzzleMsg" class="message" role="status"></p>
+
+    </div>
+
+  </section>
+
+  <!-- 7. CATCH HEARTS -->
+
+  <section class="screen" id="catch">
+
+    <div class="panel">
+
+      <div class="eyebrow">Adventure 04</div>
+
+      <h2>Catch the Hearts 💗</h2>
+
+      <p>Tap 10 floating hearts before the time runs out!</p>
+
+      <p id="catchStatus" class="subtitle">Hearts: 0 / 10 · Time: 15</p>
+
+      <div id="catchArea">
+
+        <div id="catchStart" style="padding-top:100px">
+
+          <div style="font-size:40px">♡ ✧ ♡</div>
+
+          <button class="btn" id="catchBtn">Let's play!</button>
+
+        </div>
+
+      </div>
+
+      <p id="catchMsg" class="message" role="status"></p>
+
+      <button class="btn hidden" id="catchRetry">Try again ↻</button>
+
+    </div>
+
+  </section>
+
+  <!-- 8. LETTER -->
+
+  <section class="screen" id="letter">
+
+    <div class="panel">
+
+      <div class="eyebrow">A little something from the heart</div>
+
+      <div class="moon">💌</div>
+
+      <h2>A Letter for You</h2>
+
+      <div class="letter">
+
+        <p>Dear Chan,</p>
+
+        <p>Happy 19th birthday! ♡</p>
+
+        <p>I'm really glad that you are part of my life. Thank you for always being there, for listening to me, and for giving me encouragement when I need it most.</p>
+
+        <p>I hope this new chapter brings you beautiful opportunities, peaceful days, genuine happiness, and the courage to follow everything your heart wishes for.</p>
+
+        <p>I hope you are always surrounded by people who love you, appreciate you, and remind you how precious you are. You deserve the kind of happiness that feels safe, warm, and real.</p>
+
+        <p>And no matter how much life changes, I hope you know that someone will always be cheering for you, believing in you, and wishing the very best for you. I'll always be on your side.</p>
+
+        <p>Thank you for being you. You make ordinary moments feel a little more special, sometimes without even realizing it.</p>
+
+        <p>And if you ever forget how special you are, I hope this little letter reminds you.</p>
+
+        <p>With lots of warmth,<br>Someone who is really glad to know you ♡</p>
+
+      </div>
+
+      <p>One more little surprise is waiting...</p>
+
+      <button class="btn" id="toGift">Open your little gift 🎁</button>
+
+    </div>
+
+  </section>
+
+  <!-- 9. GIFT -->
+
+  <section class="screen" id="gift">
+
+    <div class="panel">
+
+      <div class="eyebrow">Made just for you</div>
+
+      <h2>Your Little Gift</h2>
+
+      <div class="gift" id="giftEmoji">🎁</div>
+
+      <button class="btn gold" id="unwrap">Untie the ribbon ♡</button>
+
+      <div id="giftMessage" class="hidden">
+
+        <div class="divider"></div>
+
+        <h2>For your 19th year ✨</h2>
+
+        <p>More happiness.<br>More dreams coming true.<br>More beautiful memories.<br>More reasons to smile.<br>And more moments that make you feel loved.</p>
+
+        <p>You deserve all the good things life has to offer, Chan. Never forget that. 💚</p>
+
+        <button class="btn" id="toMusic">A song for you ♪</button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- 10. MUSIC -->
+
+  <section class="screen" id="music">
+
+    <div class="panel">
+
+      <div class="moon">♫</div>
+
+      <div class="eyebrow">A little soundtrack for you</div>
+
+      <h2>I Think They Call This Love</h2>
+
+      <p class="subtitle">Elliot James Reay</p>
+
+      <p>Some songs say the things ordinary words can't quite explain. Here's one for your special day. ♡</p>
+
+      <button class="btn" id="playSong">Find & play on YouTube ▶</button>
+
+      <p class="subtitle" style="font-size:12px">YouTube will open so you can play the song.</p>
+
+      <div class="divider"></div>
+
+      <button class="btn light" id="endingBtn">See your final surprise ✨</button>
+
+    </div>
+
+  </section>
+
+  <!-- 11. ENDING -->
+
+  <section class="screen" id="ending">
+
+    <div class="panel">
+
+      <div class="moon">☾ ✧ ♡</div>
+
+      <div class="eyebrow">Your universe, always</div>
+
+      <h1>For Chan</h1>
+
+      <p>You may be just one person in this world, but you make this little part of my world feel brighter.</p>
+
+      <div class="divider"></div>
+
+      <h2>Happy Birthday, Chan! 🎂</h2>
+
+      <p>May your 19th year be kinder, brighter, and more beautiful than you imagined.</p>
+
+      <p>Whenever you need a little reminder that the world still has lovely things in it, remember this tiny universe is here.</p>
+
+      <p class="subtitle">Same sky, different dreams.<br>But I hope life is always gentle with you. 💚</p>
+
+      <div class="moon">🌿 ✨ 🌙</div>
+
+      <button class="btn light" id="revisit">Stay a little longer ↻</button>
+
+    </div>
+
+  </section>
+
+  <footer>MADE WITH LOVE · A LITTLE UNIVERSE FOR CHAN ♡</footer>
+
+</main>
+
+<script>
+
+/* Tiny stars */
+
+const starBox = document.getElementById("stars");
+
+for (let i = 0; i < 55; i++) {
+
+  const s = document.createElement("span");
+
+  s.className = "star";
+
+  s.textContent = i % 4 === 0 ? "✧" : "·";
+
+  s.style.left = Math.random() * 100 + "%";
+
+  s.style.top = Math.random() * 100 + "%";
+
+  s.style.fontSize = (8 + Math.random() * 15) + "px";
+
+  s.style.animationDelay = Math.random() * 3 + "s";
+
+  starBox.appendChild(s);
+
+}
+
+/* Screen navigation */
+
+const screens = [...document.querySelectorAll(".screen")];
+
+function show(id) {
+
+  screens.forEach(s => s.classList.toggle("active", s.id === id));
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+}
+
+function say(id, text) {
+
+  document.getElementById(id).textContent = text;
+
+}
+
+const nameInput = document.getElementById("nameInput");
+
+document.getElementById("enterBtn").addEventListener("click", () => {
+
+  if (nameInput.value.trim().toLowerCase() !== "aye chan myat mon oo") {
+
+    say("nameError", "That name doesn't unlock this universe. Try the full name again ♡");
+
+    return;
+
+  }
+
+  say("nameError", "");
+
+  show("identity");
+
+});
+
+nameInput.addEventListener("keydown", e => {
+
+  if (e.key === "Enter") document.getElementById("enterBtn").click();
+
+});
+
+document.getElementById("yesBtn").onclick = () => {
+
+  show("journey");
+
+  updateProgress();
+
+};
+
+document.getElementById("noBtn").onclick = () => {
+
+  say("identityMsg", "You're welcome to look around, but this little universe was made for Chan. ♡");
+
+};
+
+/* Sequential unlocks */
+
+let completed = [false, false, false, false];
+
+let activeGame = 0;
+
+const gameScreens = ["quiz", "memory", "puzzle", "catch"];
+
+const gameNames = ["The Quiz", "Memory", "The Puzzle", "Catch Hearts"];
+
+function updateProgress() {
+
+  const count = completed.filter(Boolean).length;
+
+  document.getElementById("bar").style.width = (count / 4 * 100) + "%";
+
+  say("progressText", count + " of 4 adventures complete");
+
+  completed.forEach((done, i) => {
+
+    const q = document.getElementById("q" + i);
+
+    q.classList.toggle("done", done);
+
+    q.classList.toggle("locked", !done && i > count);
+
+    q.querySelector("span").textContent = done ? "✓" : ["✦","♡","🧩","💗"][i];
+
+  });
+
+  if (count === 4) {
+
+    say("nextText", "You found every little surprise. Your letter is ready. 💌");
+
+    document.getElementById("startGame").textContent = "Read your letter →";
+
+  } else {
+
+    say("nextText", "Next up: " + gameNames[count] + ".");
+
+    document.getElementById("startGame").textContent = "Begin the adventure →";
+
+  }
+
+}
+
+document.getElementById("startGame").onclick = () => {
+
+  const count = completed.filter(Boolean).length;
+
+  if (count === 4) { show("letter"); return; }
+
+  activeGame = count;
+
+  show(gameScreens[count]);
+
+  if (count === 0) startQuiz();
+
+  if (count === 1) startMemory();
+
+  if (count === 2) startPuzzle();
+
+  if (count === 3) resetCatch();
+
+};
+
+function winGame(index) {
+
+  completed[index] = true;
+
+  updateProgress();
+
+  setTimeout(() => {
+
+    if (index < 3) {
+
+      activeGame = index + 1;
+
+      show(gameScreens[activeGame]);
+
+      if (activeGame === 1) startMemory();
+
+      if (activeGame === 2) startPuzzle();
+
+      if (activeGame === 3) resetCatch();
+
+    } else {
+
+      show("journey");
+
+    }
+
+  }, 1100);
+
+}
+
+/* Quiz: simple, friendly questions */
+
+const quizData = [
+
+  {q:"When is Chan's birthday?", a:["October 14","August 16","December 25","January 1"], c:0},
+
+  {q:"What is the theme of this little universe?", a:["Ocean blue","Pastel mint & ivory","All black","Bright orange"], c:1},
+
+  {q:"How old is Chan turning?", a:["17","18","19","20"], c:2},
+
+  {q:"Which song is waiting for Chan?", a:["Perfect","Until I Found You","I Think They Call This Love","Photograph"], c:2},
+
+  {q:"What does this little universe wish for Chan?", a:["More worries","Less dreaming","A beautiful, happy year","No surprises"], c:2}
+
+];
+
+let qi = 0, quizLocked = false;
+
+function startQuiz() { qi = 0; renderQuiz(); }
+
+function renderQuiz() {
+
+  quizLocked = false;
+
+  const item = quizData[qi];
+
+  say("quizCount", "Question " + (qi+1) + " of " + quizData.length);
+
+  document.getElementById("question").textContent = item.q;
+
+  say("quizMsg", "");
+
+  document.getElementById("quizNext").classList.add("hidden");
+
+  const box = document.getElementById("answers");
+
+  box.innerHTML = "";
+
+  item.a.forEach((answer, i) => {
+
+    const b = document.createElement("button");
+
+    b.className = "answer";
+
+    b.textContent = String.fromCharCode(65+i) + ". " + answer;
+
+    b.onclick = () => {
+
+      if (quizLocked) return;
+
+      quizLocked = true;
+
+      [...box.children].forEach((btn, j) => {
+
+        btn.disabled = true;
+
+        if (j === item.c) btn.classList.add("correct");
+
+        else if (j === i) btn.classList.add("wrong");
+
+      });
+
+      if (i === item.c) say("quizMsg", "That's right! ✨");
+
+      else say("quizMsg", "Not quite, but that's okay. Keep going! ♡");
+
+      const next = document.getElementById("quizNext");
+
+      next.classList.remove("hidden");
+
+      next.textContent = qi === quizData.length-1 ? "Finish quiz ✓" : "Next question →";
+
+    };
+
+    box.appendChild(b);
+
+  });
+
+}
+
+document.getElementById("quizNext").onclick = () => {
+
+  if (!quizLocked) return;
+
+  if (qi < quizData.length - 1) { qi++; renderQuiz(); }
+
+  else {
+
+    say("quizMsg", "Adventure complete! Memory is waiting... 💚");
+
+    winGame(0);
+
+  }
+
+};
+
+/* Memory matching */
+
+const memorySymbols = ["🌙","🌷","⭐","🦋","💚","🎁"];
+
+let cards = [], firstCard = null, lockMemory = false, pairs = 0, memoryRun = 0;
+
+function startMemory() {
+
+  memoryRun++;
+
+  const run = memoryRun;
+
+  cards = [...memorySymbols, ...memorySymbols].sort(() => Math.random() - .5);
+
+  firstCard = null; lockMemory = false; pairs = 0;
+
+  say("memoryCount", "Pairs found: 0 / 6");
+
+  say("memoryMsg", "");
+
+  const grid = document.getElementById("memoryGrid");
+
+  grid.innerHTML = "";
+
+  cards.forEach((symbol, index) => {
+
+    const b = document.createElement("button");
+
+    b.className = "memory-card";
+
+    b.textContent = "✦";
+
+    b.setAttribute("aria-label", "Hidden card");
+
+    b.onclick = () => {
+
+      if (run !== memoryRun || lockMemory || b.classList.contains("matched") || b === firstCard) return;
+
+      b.textContent = symbol;
+
+      b.classList.add("open");
+
+      if (!firstCard) { firstCard = b; return; }
+
+      const previous = firstCard;
+
+      firstCard = null;
+
+      if (previous.textContent === b.textContent) {
+
+        previous.classList.add("matched");
+
+        b.classList.add("matched");
+
+        previous.disabled = b.disabled = true;
+
+        pairs++;
+
+        say("memoryCount", "Pairs found: " + pairs + " / 6");
+
+        if (pairs === 6) {
+
+          say("memoryMsg", "Every pair found! Beautifully done. ✨");
+
+          winGame(1);
+
+        }
+
+      } else {
+
+        lockMemory = true;
+
+        setTimeout(() => {
+
+          if (run !== memoryRun) return;
+
+          previous.textContent = b.textContent = "✦";
+
+          previous.classList.remove("open");
+
+          b.classList.remove("open");
+
+          lockMemory = false;
+
+        }, 700);
+
+      }
+
+    };
+
+    grid.appendChild(b);
+
+  });
+
+}
+
+/* Sliding number puzzle */
+
+let tiles = [];
+
+function adjacent(a, b) {
+
+  const ar = Math.floor(a/3), ac = a%3;
+
+  const br = Math.floor(b/3), bc = b%3;
+
+  return Math.abs(ar-br) + Math.abs(ac-bc) === 1;
+
+}
+
+function startPuzzle() {
+
+  do {
+
+    tiles = [1,2,3,4,5,6,7,8,0];
+
+    for (let i = 0; i < 70; i++) {
+
+      const empty = tiles.indexOf(0);
+
+      const opts = tiles.map((v,j) => j).filter(j => adjacent(j,empty));
+
+      const pick = opts[Math.floor(Math.random()*opts.length)];
+
+      [tiles[empty], tiles[pick]] = [tiles[pick], tiles[empty]];
+
+    }
+
+  } while (tiles.every((v,i) => v === (i+1)%9));
+
+  say("puzzleMsg", "You can do it, Chan! ♡");
+
+  renderPuzzle();
+
+}
+
+function renderPuzzle() {
+
+  const grid = document.getElementById("puzzleGrid");
+
+  grid.innerHTML = "";
+
+  tiles.forEach((v, i) => {
+
+    const b = document.createElement("button");
+
+    b.className = "tile" + (v === 0 ? " empty" : "");
+
+    b.textContent = v === 0 ? "" : v;
+
+    b.setAttribute("aria-label", v === 0 ? "Empty space" : "Move tile " + v);
+
+    b.disabled = v === 0;
+
+    b.onclick = () => {
+
+      const empty = tiles.indexOf(0);
+
+      if (!adjacent(i, empty)) return;
+
+      [tiles[i], tiles[empty]] = [tiles[empty], tiles[i]];
+
+      renderPuzzle();
+
+      if (tiles.every((n,j) => n === (j+1)%9)) {
+
+        say("puzzleMsg", "The stars are in order! ✨");
+
+        winGame(2);
+
+      }
+
+    };
+
+    grid.appendChild(b);
+
+  });
+
+}
+
+document.getElementById("shufflePuzzle").onclick = startPuzzle;
+
+/* Catch the Hearts */
+
+let caught = 0, seconds = 15, catchTimer = null, spawnTimer = null, catchRun = 0;
+
+const catchArea = document.getElementById("catchArea");
+
+function clearCatchTimers() {
+
+  clearInterval(catchTimer);
+
+  clearInterval(spawnTimer);
+
+  catchTimer = spawnTimer = null;
+
+}
+
+function resetCatch() {
+
+  catchRun++;
+
+  clearCatchTimers();
+
+  caught = 0; seconds = 15;
+
+  catchArea.innerHTML = '<div id="catchStart" style="padding-top:100px"><div style="font-size:40px">♡ ✧ ♡</div><button class="btn" id="catchBtn">Let\\'s play!</button></div>';
+
+  document.getElementById("catchBtn").onclick = startCatch;
+
+  say("catchStatus", "Hearts: 0 / 10 · Time: 15");
+
+  say("catchMsg", "");
+
+  document.getElementById("catchRetry").classList.add("hidden");
+
+}
+
+function startCatch() {
+
+  const run = ++catchRun;
+
+  clearCatchTimers();
+
+  caught = 0; seconds = 15;
+
+  catchArea.innerHTML = "";
+
+  say("catchMsg", "Catch as many as you can! 💗");
+
+  const spawn = () => {
+
+    if (run !== catchRun || caught >= 10 || seconds <= 0) return;
+
+    const heart = document.createElement("button");
+
+    heart.className = "heart";
+
+    heart.textContent = ["💗","💚","♡","💖"][Math.floor(Math.random()*4)];
+
+    heart.style.left = (Math.random()*75+5) + "%";
+
+    heart.style.top = (Math.random()*65+10) + "%";
+
+    heart.setAttribute("aria-label", "Catch heart");
+
+    heart.onclick = () => {
+
+      if (run !== catchRun || heart.dataset.caught) return;
+
+      heart.dataset.caught = "1";
+
+      heart.remove();
+
+      caught++;
+
+      say("catchStatus", "Hearts: " + caught + " / 10 · Time: " + seconds);
+
+      if (caught >= 10) finishCatch(true, run);
+
+    };
+
+    catchArea.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 2500);
+
+  };
+
+  spawn();
+
+  spawnTimer = setInterval(spawn, 600);
+
+  catchTimer = setInterval(() => {
+
+    if (run !== catchRun) return;
+
+    seconds--;
+
+    say("catchStatus", "Hearts: " + caught + " / 10 · Time: " + seconds);
+
+    if (seconds <= 0) finishCatch(false, run);
+
+  }, 1000);
+
+}
+
+function finishCatch(won, run) {
+
+  if (run !== catchRun) return;
+
+  clearCatchTimers();
+
+  if (won) {
+
+    say("catchMsg", "You caught every heart! This universe is yours. 💚");
+
+    catchArea.innerHTML = '<div style="padding-top:95px;font-size:45px">💗 ✨ 💗</div>';
+
+    winGame(3);
+
+  } else {
+
+    say("catchMsg", "Almost! Give it another try, Chan. ♡");
+
+    document.getElementById("catchRetry").classList.remove("hidden");
+
+  }
+
+}
+
+document.getElementById("catchBtn").onclick = startCatch;
+
+document.getElementById("catchRetry").onclick = resetCatch;
+
+/* Letter, gift and ending */
+
+document.getElementById("toGift").onclick = () => show("gift");
+
+document.getElementById("unwrap").onclick = () => {
+
+  document.getElementById("giftEmoji").textContent = "🎀";
+
+  document.getElementById("giftMessage").classList.remove("hidden");
+
+  document.getElementById("unwrap").classList.add("hidden");
+
+};
+
+document.getElementById("toMusic").onclick = () => show("music");
+
+document.getElementById("playSong").onclick = () => {
+
+  window.open(
+
+    "https://www.youtube.com/results?search_query=I+Think+They+Call+This+Love+Elliot+James+Reay",
+
+    "_blank",
+
+    "noopener,noreferrer"
+
+  );
+
+};
+
+document.getElementById("endingBtn").onclick = () => show("ending");
+
+document.getElementById("revisit").onclick = () => show("journey");
+
+</script>
+
+</body>
+
+</html>
